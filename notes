@@ -1,0 +1,192 @@
+
+Apologies for the miscommunication earlier. I truly want to ensure this is done exactly as you want. I will now take every single thing we discussed—including all explanations, notes, code snippets, and everything else—and consolidate it into a fully comprehensive README.md file.
+
+Here’s the corrected README.md file, including every single word and explanation we covered:
+
+markdown
+Copy code
+# Linux Interview Prep: SRE & SWE
+
+## Overview
+This guide is designed to prepare for **Site Reliability Engineer (SRE)** and **Software Engineer (SWE)** interviews with a focus on **Linux fundamentals**. Topics include filesystems, permissions, process management, performance monitoring, and troubleshooting scenarios—all aligned with **big tech interview expectations**.
+
+---
+
+## Table of Contents
+1. [Linux Filesystem Basics](#1-linux-filesystem-basics)
+2. [File Permissions](#2-file-permissions)
+3. [Process Management](#3-process-management)
+4. [Performance Monitoring](#4-performance-monitoring)
+5. [Disk Usage Troubleshooting](#5-disk-usage-troubleshooting)
+
+---
+
+## 1. Linux Filesystem Basics
+
+### Explanation
+The Linux filesystem is hierarchical, starting at the **root directory (`/`)**. Key directories include:
+- **`/etc`**: Contains system and application configuration files.
+- **`/var`**: Holds variable data such as logs, caches, and spools.
+- **`/proc`**: A virtual filesystem that provides runtime system information like process and memory stats.
+- **`/home`**: User home directories.
+- **`/dev`**: Device files for hardware like disks and USB drives.
+
+### Notes
+Understanding the directory structure is critical for troubleshooting system issues and performing common administrative tasks. For example:
+- Logs in `/var/log` help debug issues.
+- Configuration files in `/etc` control how services and applications behave.
+
+### Example Commands
+1. To check the size of the `/var` directory:
+   ```bash
+   du -sh /var
+This command provides the total size of /var in a human-readable format.
+
+To display mounted filesystems and their usage:
+
+bash
+Copy code
+df -h
+The -h flag ensures the output is human-readable.
+
+To list all files in /etc with detailed information:
+
+bash
+Copy code
+ls -l /etc
+This shows file permissions, ownership, and sizes for each file in /etc.
+
+2. File Permissions
+Explanation
+Linux permissions control access to files and directories for three types of users:
+
+Owner: The user who owns the file.
+Group: Users in the file's group.
+Others: Everyone else.
+Permissions include:
+
+r: Read access.
+w: Write access.
+x: Execute access.
+Permissions can be modified using:
+
+Symbolic mode: E.g., chmod u+x file.
+Numeric mode: E.g., chmod 755 file.
+Notes
+Default Permissions: Default file permissions are determined by the umask setting.
+Special Modes:
+s: SetUID or SetGID bits for files or directories.
+t: Sticky bit, often used in directories like /tmp.
+Example Commands
+Add execute permission for the owner of a file:
+
+bash
+Copy code
+chmod u+x script.sh
+Set permissions to rwxr-xr-- using numeric mode:
+
+bash
+Copy code
+chmod 754 file.txt
+Change file ownership to user1 and group to group1:
+
+bash
+Copy code
+chown user1:group1 file.txt
+View file permissions:
+
+bash
+Copy code
+ls -l file.txt
+3. Process Management
+Explanation
+Processes represent running programs in Linux. Each process has a:
+
+PID: Unique process ID.
+PPID: Parent process ID.
+State: Running, sleeping, stopped, or zombie.
+Key tools for managing processes:
+
+ps: Displays running processes.
+top/htop: Real-time process monitoring.
+kill/killall: Terminate processes.
+systemctl/service: Manage system services.
+Notes
+Processes can be prioritized using renice to adjust their CPU usage.
+
+Example Commands
+View all processes:
+
+bash
+Copy code
+ps aux
+Find processes consuming the most CPU:
+
+bash
+Copy code
+ps aux --sort=-%cpu | head -n 5
+Forcefully kill a process by PID:
+
+bash
+Copy code
+kill -9 <PID>
+Restart a system service:
+
+bash
+Copy code
+sudo systemctl restart <service_name>
+4. Performance Monitoring
+Explanation
+Monitoring system performance involves checking CPU, memory, disk, and network usage. Common tools include:
+
+top: Real-time process monitoring.
+free: Memory usage.
+vmstat: CPU, memory, and I/O statistics.
+iotop: Disk I/O usage.
+Notes
+Performance monitoring is critical for identifying bottlenecks in high-load scenarios.
+
+Example Commands
+View memory usage:
+
+bash
+Copy code
+free -h
+Check CPU and memory usage with top:
+
+bash
+Copy code
+top
+Display CPU, memory, and I/O stats at 2-second intervals:
+
+bash
+Copy code
+vmstat 2
+5. Disk Usage Troubleshooting
+Explanation
+Disk space issues often require identifying large files and directories. Useful tools:
+
+du: Disk usage of files and directories.
+df: Disk usage by mounted filesystems.
+find: Locate specific files.
+Example Commands
+Total disk usage of the root filesystem:
+
+bash
+Copy code
+du -sh /
+Largest subdirectories in /var:
+
+bash
+Copy code
+du -h --max-depth=1 /var | sort -hr
+Top 3 largest files in /var/log:
+
+bash
+Copy code
+find /var/log -type f -exec du -h {} + | sort -hr | head -n 3
+Final Notes
+This guide provides foundational Linux knowledge and practical scenarios tailored for SRE and SWE interviews. For additional practice:
+
+Use platforms like LeetCode and HackerRank for scripting challenges.
+Simulate real-world issues in a virtualized environment with tools like Docker or VirtualBox.
